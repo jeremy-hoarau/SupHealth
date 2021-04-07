@@ -15,6 +15,8 @@ class ItemCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.title.text = ""
+        self.value.text = ""
     }
 
     func setData(title: String, value: String){
