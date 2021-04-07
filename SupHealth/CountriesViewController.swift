@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class CountriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var countryList : [[String : String]] = []
@@ -17,6 +17,7 @@ class SecondViewController: UIViewController {
         super.viewDidLoad()
         
         GetData()
+        self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "CountryRow", bundle: nil), forCellReuseIdentifier: "CountryRow")
     }
@@ -42,12 +43,6 @@ class SecondViewController: UIViewController {
         }
         task.resume()
     }
-}
-
-extension SecondViewController : UITableViewDataSource{
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         countryList.count
@@ -59,6 +54,18 @@ extension SecondViewController : UITableViewDataSource{
             row.setData(country: countryList[indexPath.row]["Country"]!)
         }
         return row
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toDetailSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "toDetailSegue") {
+            let detailController = segue.destination as! DetailViewController
+            detailController.country = countryList[tableView.indexPathForSelectedRow!.row]["Country"]!
+            tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+        }
     }
 }
 

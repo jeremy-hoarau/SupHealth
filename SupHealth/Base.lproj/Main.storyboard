@@ -8,16 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First-->
+        <!--Global Informations-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController id="9pv-A4-QxB" customClass="FirstViewController" customModule="SupHealth" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="9pv-A4-QxB" customClass="GlobalInfosViewController" customModule="SupHealth" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7th-Ao-rFt">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="safeArea" id="JuF-Xx-eYq">
                                     <size key="itemSize" width="150" height="150"/>
@@ -36,17 +36,26 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YK5-uW-gM7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Global Informations" id="rA3-0j-U1O"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="7th-Ao-rFt" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="AG3-Fn-Cd1"/>
-                            <constraint firstItem="7th-Ao-rFt" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="hYx-Rv-Wdv"/>
-                            <constraint firstItem="7th-Ao-rFt" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="jd7-Zj-vpA"/>
-                            <constraint firstItem="7th-Ao-rFt" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="zxE-cG-ZMh"/>
+                            <constraint firstItem="7th-Ao-rFt" firstAttribute="top" secondItem="YK5-uW-gM7" secondAttribute="bottom" id="Mva-zh-KUA"/>
+                            <constraint firstItem="7th-Ao-rFt" firstAttribute="bottom" secondItem="PQr-Ze-W5v" secondAttribute="bottom" id="Mzt-6h-8EP"/>
+                            <constraint firstItem="YK5-uW-gM7" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="XFy-Ru-sEf"/>
+                            <constraint firstItem="7th-Ao-rFt" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="bIY-hp-LlO"/>
+                            <constraint firstItem="YK5-uW-gM7" firstAttribute="top" secondItem="PQr-Ze-W5v" secondAttribute="top" id="gOn-T6-1wD"/>
+                            <constraint firstItem="YK5-uW-gM7" firstAttribute="leading" secondItem="PQr-Ze-W5v" secondAttribute="leading" id="gaS-TW-2HJ"/>
+                            <constraint firstItem="7th-Ao-rFt" firstAttribute="trailing" secondItem="PQr-Ze-W5v" secondAttribute="trailing" id="n4L-Tp-HJd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Global Informations" image="first" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="collectionView" destination="7th-Ao-rFt" id="zwd-t5-hlt"/>
                     </connections>
@@ -55,31 +64,98 @@
             </objects>
             <point key="canvasLocation" x="749.27536231884062" y="-320.08928571428572"/>
         </scene>
-        <!--Second-->
+        <!--Detail View Controller-->
+        <scene sceneID="ONe-SB-KeB">
+            <objects>
+                <viewController id="28l-94-fHP" customClass="DetailViewController" customModule="SupHealth" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="COX-5Y-gai">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kPj-Uu-Shx">
+                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Aq5-lm-rrC">
+                                    <size key="itemSize" width="170" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5ka-45-GaJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="170" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NDm-Wy-MiC">
+                                            <rect key="frame" x="0.0" y="0.0" width="170" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PfK-0e-SJ7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <items>
+                                    <navigationItem title="Title" id="crq-AR-0y8"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="top" secondItem="sHk-UM-Xkv" secondAttribute="top" id="1JJ-Lo-MQm"/>
+                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="leading" secondItem="sHk-UM-Xkv" secondAttribute="leading" id="6VU-Af-i7B"/>
+                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="top" secondItem="PfK-0e-SJ7" secondAttribute="bottom" id="By7-Er-JFM"/>
+                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="bottom" secondItem="sHk-UM-Xkv" secondAttribute="bottom" id="FSU-vX-w03"/>
+                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="trailing" secondItem="sHk-UM-Xkv" secondAttribute="trailing" id="GWH-OL-bwX"/>
+                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="leading" secondItem="sHk-UM-Xkv" secondAttribute="leading" id="Tkv-2P-T8d"/>
+                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="trailing" secondItem="sHk-UM-Xkv" secondAttribute="trailing" id="Yeq-Zv-pUX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="sHk-UM-Xkv"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SpX-NK-Ibu"/>
+                    <connections>
+                        <outlet property="collectionView" destination="kPj-Uu-Shx" id="oGE-q0-sFX"/>
+                        <outlet property="pageTitle" destination="crq-AR-0y8" id="4mI-y6-NgA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SLG-cE-Dh8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1728.985507246377" y="359.59821428571428"/>
+        </scene>
+        <!--Countries-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="SupHealth" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="CountriesViewController" customModule="SupHealth" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gNp-JP-rfm">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4l-F8-JwL">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="Countries" id="5mS-e5-RGM"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="gNp-JP-rfm" firstAttribute="trailing" secondItem="O1u-W8-tvY" secondAttribute="trailing" id="9YB-SS-d7v"/>
-                            <constraint firstItem="gNp-JP-rfm" firstAttribute="bottom" secondItem="O1u-W8-tvY" secondAttribute="bottom" id="VNG-8s-4yU"/>
-                            <constraint firstItem="gNp-JP-rfm" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="dVP-sR-k9p"/>
-                            <constraint firstItem="gNp-JP-rfm" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="pAK-el-T2A"/>
+                            <constraint firstItem="gNp-JP-rfm" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="E0k-xZ-xir"/>
+                            <constraint firstItem="gNp-JP-rfm" firstAttribute="top" secondItem="x4l-F8-JwL" secondAttribute="bottom" id="H0T-r2-UEb"/>
+                            <constraint firstItem="x4l-F8-JwL" firstAttribute="trailing" secondItem="O1u-W8-tvY" secondAttribute="trailing" id="U0M-7N-xpS"/>
+                            <constraint firstItem="x4l-F8-JwL" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="WSl-oo-x1G"/>
+                            <constraint firstItem="gNp-JP-rfm" firstAttribute="trailing" secondItem="O1u-W8-tvY" secondAttribute="trailing" id="axl-aT-ZT5"/>
+                            <constraint firstItem="gNp-JP-rfm" firstAttribute="bottom" secondItem="O1u-W8-tvY" secondAttribute="bottom" id="ggh-L7-KzL"/>
+                            <constraint firstItem="x4l-F8-JwL" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="yas-NP-p5A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Countries" image="second" id="cPa-gy-q4n"/>
                     <connections>
                         <outlet property="tableView" destination="gNp-JP-rfm" id="4qk-lb-Hts"/>
+                        <segue destination="28l-94-fHP" kind="show" identifier="toDetailSegue" id="HwF-IZ-Dsw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>

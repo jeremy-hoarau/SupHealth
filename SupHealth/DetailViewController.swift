@@ -1,23 +1,28 @@
 //
-//  FirstViewController.swift
+//  DetailViewController.swift
 //  SupHealth
 //
-//  Created by Student Supinfo on 06/04/2021.
+//  Created by Student Supinfo on 07/04/2021.
 //  Copyright © 2021 supinfo student. All rights reserved.
 //
 
 import UIKit
 
-class GlobalInfosViewController: UIViewController {
+class DetailViewController: UIViewController, UICollectionViewDataSource {
 
+    @IBOutlet weak var pageTitle: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
-    var dataReceived : Bool = false
-    var globalInfos : [String : Any] = [:]
+    
+    var country : String?
+
+    var countryInfos : [String : Any] = [:]
+    
     let titles = [["NewConfirmed", "New Confirmed"], ["TotalConfirmed", "Total Confirmed"], ["NewDeaths", "New Deaths"], ["TotalDeaths", "Total Deaths"], ["NewRecovered", "New Recovered"], ["TotalRecovered", "Total Recovered"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        pageTitle.title = country
+
         getData()
         self.collectionView.dataSource = self
         self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
@@ -25,7 +30,7 @@ class GlobalInfosViewController: UIViewController {
     
     
     private func getData(){
-        
+        print("Get DATA")
         let url = URL(string: "https://api.covid19api.com/summary")!
         
         var request = URLRequest(url: url)
@@ -38,32 +43,28 @@ class GlobalInfosViewController: UIViewController {
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
-                self.globalInfos = responseJSON["Global"] as! [String : Any]
-                self.dataReceived = true
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
+                let countriesList = (responseJSON["Countries"] as! [[String : Any]]).first(where: {($0["Country"] as! String) == self.country!})
+                if(countriesList != nil) {
+                    self.countryInfos = countriesList!
+                    DispatchQueue.main.async {
+                        print("Reload DATA")
+                        self.collectionView.reloadData()
+                    }
                 }
             }
         }
 
         task.resume()
     }
-}
-
-extension GlobalInfosViewController: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (dataReceived ? 6 : 0)
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ItemCell", for: indexPath) as! ItemCell
-        if(globalInfos.count > 0) {
-            cell.setData(title: titles[indexPath.row][1], value: (globalInfos[titles[indexPath.row][0]] as! NSNumber).stringValue)
+        if(countryInfos.count > 0) {
+            cell.setData(title: titles[indexPath.row][1], value: (countryInfos[titles[indexPath.row][0]] as! NSNumber).stringValue)
         }
         
         return cell

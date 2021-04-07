@@ -8,10 +8,9 @@
 
 import UIKit
 
-class GlobalInfosViewController: UIViewController {
+class GlobalInfosViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var dataReceived : Bool = false
     var globalInfos : [String : Any] = [:]
     let titles = [["NewConfirmed", "New Confirmed"], ["TotalConfirmed", "Total Confirmed"], ["NewDeaths", "New Deaths"], ["TotalDeaths", "Total Deaths"], ["NewRecovered", "New Recovered"], ["TotalRecovered", "Total Recovered"]]
     
@@ -39,7 +38,6 @@ class GlobalInfosViewController: UIViewController {
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
                 self.globalInfos = responseJSON["Global"] as! [String : Any]
-                self.dataReceived = true
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
@@ -48,16 +46,9 @@ class GlobalInfosViewController: UIViewController {
 
         task.resume()
     }
-}
-
-extension GlobalInfosViewController: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (dataReceived ? 6 : 0)
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
