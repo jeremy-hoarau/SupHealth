@@ -73,7 +73,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kPj-Uu-Shx">
-                                <rect key="frame" x="0.0" y="56" width="414" height="752"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="703"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Aq5-lm-rrC">
                                     <size key="itemSize" width="170" height="150"/>
@@ -96,6 +96,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
                                     <navigationItem title="Title" id="crq-AR-0y8">
+                                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" image="arrow.left" catalog="system" style="plain" id="Hfr-8a-3EP"/>
                                         <barButtonItem key="rightBarButtonItem" title="Fav" image="star" catalog="system" style="plain" id="MGE-Rq-NOj">
                                             <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </barButtonItem>
@@ -115,8 +116,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sHk-UM-Xkv"/>
                     </view>
-                    <navigationItem key="navigationItem" id="SpX-NK-Ibu"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="Hfr-8a-3EP" id="dcC-Ai-qDL"/>
                         <outlet property="collectionView" destination="kPj-Uu-Shx" id="oGE-q0-sFX"/>
                         <outlet property="pageTitle" destination="crq-AR-0y8" id="4mI-y6-NgA"/>
                         <outlet property="starButton" destination="MGE-Rq-NOj" id="qCL-Pz-LDO"/>
@@ -209,6 +211,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
         <image name="globe" catalog="system" width="128" height="121"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="star" catalog="system" width="128" height="116"/>

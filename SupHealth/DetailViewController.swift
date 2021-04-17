@@ -13,6 +13,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource {
     @IBOutlet weak var pageTitle: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var starButton: UIBarButtonItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     var country : String = ""
     var countryInfos : [String : Any] = [:]
@@ -27,8 +28,8 @@ class DetailViewController: UIViewController, UICollectionViewDataSource {
         getAndUpdateFavoriteState()
             
         pageTitle.title = country
-        starButton.target = self
         starButton.action = #selector(toggleFavorite(sender:))
+        backButton.action = #selector(backToCountriesView)
 
         getData()
         self.collectionView.dataSource = self
@@ -97,5 +98,9 @@ class DetailViewController: UIViewController, UICollectionViewDataSource {
         }
         favorite = !favorite
         saveFavoriteState(value: favorite)
+    }
+    
+    @objc func backToCountriesView(){
+        dismiss(animated: true, completion: nil)
     }
 }
