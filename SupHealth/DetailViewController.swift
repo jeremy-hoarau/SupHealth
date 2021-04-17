@@ -12,25 +12,34 @@ class DetailViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var pageTitle: UINavigationItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var starButton: UIBarButtonItem!
     
-    var country : String?
-
+    var country : String = ""
     var countryInfos : [String : Any] = [:]
-    
     let titles = [["NewConfirmed", "New Confirmed"], ["TotalConfirmed", "Total Confirmed"], ["NewDeaths", "New Deaths"], ["TotalDeaths", "Total Deaths"], ["NewRecovered", "New Recovered"], ["TotalRecovered", "Total Recovered"]]
+    var favorite = false
+    let defaults = UserDefaults.standard
+    var updateCountriesList : (() -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        getAndUpdateFavoriteState()
+            
         pageTitle.title = country
+        starButton.target = self
+        starButton.action = #selector(toggleFavorite(sender:))
 
         getData()
         self.collectionView.dataSource = self
         self.collectionView.register(UINib(nibName: "ItemCell", bundle: nil), forCellWithReuseIdentifier: "ItemCell")
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        updateCountriesList!()
+    }
     
     private func getData(){
-        print("Get DATA")
         let url = URL(string: "https://api.covid19api.com/summary")!
         
         var request = URLRequest(url: url)
@@ -43,11 +52,10 @@ class DetailViewController: UIViewController, UICollectionViewDataSource {
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [String: Any] {
-                let countriesList = (responseJSON["Countries"] as! [[String : Any]]).first(where: {($0["Country"] as! String) == self.country!})
+                let countriesList = (responseJSON["Countries"] as! [[String : Any]]).first(where: {($0["Country"] as! String) == self.country})
                 if(countriesList != nil) {
                     self.countryInfos = countriesList!
                     DispatchQueue.main.async {
-                        print("Reload DATA")
                         self.collectionView.reloadData()
                     }
                 }
@@ -68,5 +76,26 @@ class DetailViewController: UIViewController, UICollectionViewDataSource {
         }
         
         return cell
+    }
+    
+    func getAndUpdateFavoriteState(){
+        favorite = defaults.bool(forKey: country)
+        if(favorite){
+            starButton.image = UIImage(systemName: "star.fill")
+        }
+    }
+    
+    func saveFavoriteState(value: Bool){
+        defaults.set(value, forKey: country)
+    }
+    
+    @objc func toggleFavorite(sender: UIBarButtonItem){
+        if(!favorite){
+            sender.image = UIImage(systemName: "star.fill")
+        } else{
+            sender.image = UIImage(systemName: "star")
+        }
+        favorite = !favorite
+        saveFavoriteState(value: favorite)
     }
 }

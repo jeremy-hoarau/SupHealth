@@ -10,20 +10,24 @@ import UIKit
 
 class CountriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var favOnly: UISwitch!
     @IBOutlet weak var tableView: UITableView!
     var countryList : [String] = []
+    let defaults = UserDefaults.standard
+    var filterFavOnly = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        GetData()
+        getData()
+        favOnly.addTarget(self, action: #selector(toggleFavoritesFilter), for: UIControl.Event.valueChanged)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "CountryRow", bundle: nil), forCellReuseIdentifier: "CountryRow")
     }
 
-    func GetData() {
-        let url = URL(string: "https://api.covid19api.com/countries")!
+    func getData() {
+        let url = URL(string: "https://api.covid19api.com/summary")!
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -34,7 +38,7 @@ class CountriesViewController: UIViewController, UITableViewDelegate, UITableVie
                 return
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-            if let responseJSON = responseJSON as? [[String : String]] {
+            if let responseJSON = responseJSON as? [String : Any] {
                 self.countryList = self.convertResponseToArray(response: responseJSON)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -44,12 +48,20 @@ class CountriesViewController: UIViewController, UITableViewDelegate, UITableVie
         task.resume()
     }
     
-    func convertResponseToArray(response : [[String : String]]) -> [String]{
+    func convertResponseToArray(response : [String : Any]) -> [String]{
+        var countryName = ""
         var array = [String]()
-        for country in response {
-            array.append(country["Country"]!)
+        let countries = response["Countries"] as! [[String : Any]]
+        for country in countries {
+            countryName = country["Country"] as! String
+            if(filterFavOnly){
+                if(!defaults.bool(forKey: countryName)){
+                    continue
+                }
+            }
+            array.append(countryName)
         }
-        return array.sorted()
+        return array
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,7 +85,13 @@ class CountriesViewController: UIViewController, UITableViewDelegate, UITableVie
             let detailController = segue.destination as! DetailViewController
             detailController.country = countryList[tableView.indexPathForSelectedRow!.row]
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
+            detailController.updateCountriesList = getData
         }
+    }
+        
+    @objc func toggleFavoritesFilter(){
+        filterFavOnly = favOnly.isOn
+        getData()
     }
 }
 

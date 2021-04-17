@@ -55,7 +55,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Global Informations" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Global Informations" image="globe" catalog="system" id="acW-dT-cKf"/>
                     <connections>
                         <outlet property="collectionView" destination="7th-Ao-rFt" id="zwd-t5-hlt"/>
                     </connections>
@@ -79,11 +79,11 @@
                                     <size key="itemSize" width="170" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="16" minY="16" maxX="16" maxY="16"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5ka-45-GaJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="170" height="150"/>
+                                        <rect key="frame" x="16" y="16" width="170" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="NDm-Wy-MiC">
                                             <rect key="frame" x="0.0" y="0.0" width="170" height="150"/>
@@ -95,19 +95,23 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PfK-0e-SJ7">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                 <items>
-                                    <navigationItem title="Title" id="crq-AR-0y8"/>
+                                    <navigationItem title="Title" id="crq-AR-0y8">
+                                        <barButtonItem key="rightBarButtonItem" title="Fav" image="star" catalog="system" style="plain" id="MGE-Rq-NOj">
+                                            <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="top" secondItem="sHk-UM-Xkv" secondAttribute="top" id="1JJ-Lo-MQm"/>
-                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="leading" secondItem="sHk-UM-Xkv" secondAttribute="leading" id="6VU-Af-i7B"/>
-                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="top" secondItem="PfK-0e-SJ7" secondAttribute="bottom" id="By7-Er-JFM"/>
-                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="bottom" secondItem="sHk-UM-Xkv" secondAttribute="bottom" id="FSU-vX-w03"/>
-                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="trailing" secondItem="sHk-UM-Xkv" secondAttribute="trailing" id="GWH-OL-bwX"/>
-                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="leading" secondItem="sHk-UM-Xkv" secondAttribute="leading" id="Tkv-2P-T8d"/>
-                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="trailing" secondItem="sHk-UM-Xkv" secondAttribute="trailing" id="Yeq-Zv-pUX"/>
+                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="bottom" secondItem="sHk-UM-Xkv" secondAttribute="bottom" id="12N-bC-3yG"/>
+                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="top" secondItem="PfK-0e-SJ7" secondAttribute="bottom" id="3SG-7K-HaW"/>
+                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="leading" secondItem="sHk-UM-Xkv" secondAttribute="leading" id="Bee-tA-Hae"/>
+                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="trailing" secondItem="sHk-UM-Xkv" secondAttribute="trailing" id="J5Z-Bq-8A3"/>
+                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="leading" secondItem="sHk-UM-Xkv" secondAttribute="leading" id="OR8-Du-jRB"/>
+                            <constraint firstItem="kPj-Uu-Shx" firstAttribute="trailing" secondItem="sHk-UM-Xkv" secondAttribute="trailing" id="RrF-mD-AhF"/>
+                            <constraint firstItem="PfK-0e-SJ7" firstAttribute="top" secondItem="sHk-UM-Xkv" secondAttribute="top" id="aeY-Hb-Aoh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sHk-UM-Xkv"/>
                     </view>
@@ -115,6 +119,7 @@
                     <connections>
                         <outlet property="collectionView" destination="kPj-Uu-Shx" id="oGE-q0-sFX"/>
                         <outlet property="pageTitle" destination="crq-AR-0y8" id="4mI-y6-NgA"/>
+                        <outlet property="starButton" destination="MGE-Rq-NOj" id="qCL-Pz-LDO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLG-cE-Dh8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -130,7 +135,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gNp-JP-rfm">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="143" width="414" height="670"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x4l-F8-JwL">
@@ -139,21 +144,43 @@
                                     <navigationItem title="Countries" id="5mS-e5-RGM"/>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Favorites Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u7r-Ro-rGJ">
+                                <rect key="frame" x="20" y="91" width="155" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="0C3-VJ-5gd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="c4J-QD-Fo9">
+                                <rect key="frame" x="345" y="102" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="hKu-Ty-45h"/>
+                                </constraints>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="gNp-JP-rfm" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="E0k-xZ-xir"/>
-                            <constraint firstItem="gNp-JP-rfm" firstAttribute="top" secondItem="x4l-F8-JwL" secondAttribute="bottom" id="H0T-r2-UEb"/>
+                            <constraint firstItem="u7r-Ro-rGJ" firstAttribute="top" secondItem="x4l-F8-JwL" secondAttribute="bottom" constant="3" id="4KJ-Nn-l6K"/>
+                            <constraint firstItem="gNp-JP-rfm" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="6Xi-HO-cps"/>
+                            <constraint firstItem="u7r-Ro-rGJ" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="20" id="7fc-3u-OZG"/>
+                            <constraint firstItem="u7r-Ro-rGJ" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="20" id="7o2-yp-EdK"/>
+                            <constraint firstItem="gNp-JP-rfm" firstAttribute="trailing" secondItem="O1u-W8-tvY" secondAttribute="trailing" id="H8I-Rb-BQj"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="c4J-QD-Fo9" secondAttribute="trailing" constant="20" id="LKt-Vp-Nbw"/>
+                            <constraint firstItem="u7r-Ro-rGJ" firstAttribute="top" secondItem="x4l-F8-JwL" secondAttribute="bottom" constant="3" id="TaV-8E-uyL"/>
                             <constraint firstItem="x4l-F8-JwL" firstAttribute="trailing" secondItem="O1u-W8-tvY" secondAttribute="trailing" id="U0M-7N-xpS"/>
                             <constraint firstItem="x4l-F8-JwL" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" id="WSl-oo-x1G"/>
-                            <constraint firstItem="gNp-JP-rfm" firstAttribute="trailing" secondItem="O1u-W8-tvY" secondAttribute="trailing" id="axl-aT-ZT5"/>
-                            <constraint firstItem="gNp-JP-rfm" firstAttribute="bottom" secondItem="O1u-W8-tvY" secondAttribute="bottom" id="ggh-L7-KzL"/>
+                            <constraint firstItem="c4J-QD-Fo9" firstAttribute="top" secondItem="x4l-F8-JwL" secondAttribute="bottom" constant="14" id="ckl-o1-WI5"/>
+                            <constraint firstItem="gNp-JP-rfm" firstAttribute="bottom" secondItem="O1u-W8-tvY" secondAttribute="bottom" id="ggS-IK-3eA"/>
+                            <constraint firstItem="gNp-JP-rfm" firstAttribute="top" secondItem="u7r-Ro-rGJ" secondAttribute="bottom" id="iSb-Qs-2Fp"/>
                             <constraint firstItem="x4l-F8-JwL" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" id="yas-NP-p5A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Countries" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="Countries" image="list.dash" catalog="system" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="favOnly" destination="c4J-QD-Fo9" id="Oob-TP-HMD"/>
                         <outlet property="tableView" destination="gNp-JP-rfm" id="4qk-lb-Hts"/>
                         <segue destination="28l-94-fHP" kind="show" identifier="toDetailSegue" id="HwF-IZ-Dsw"/>
                     </connections>
@@ -182,7 +209,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="first" width="30" height="30"/>
-        <image name="second" width="30" height="30"/>
+        <image name="globe" catalog="system" width="128" height="121"/>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="star" catalog="system" width="128" height="116"/>
     </resources>
 </document>
