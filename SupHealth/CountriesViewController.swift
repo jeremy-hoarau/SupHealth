@@ -11,7 +11,7 @@ import UIKit
 class CountriesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    var countryList : [[String : String]] = []
+    var countryList : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,13 +35,21 @@ class CountriesViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             if let responseJSON = responseJSON as? [[String : String]] {
-                self.countryList = responseJSON
+                self.countryList = self.convertResponseToArray(response: responseJSON)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }
         }
         task.resume()
+    }
+    
+    func convertResponseToArray(response : [[String : String]]) -> [String]{
+        var array = [String]()
+        for country in response {
+            array.append(country["Country"]!)
+        }
+        return array.sorted()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,7 +59,7 @@ class CountriesViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = tableView.dequeueReusableCell(withIdentifier: "CountryRow", for: indexPath) as! CountryRow
         if(countryList.count > 0) {
-            row.setData(country: countryList[indexPath.row]["Country"]!)
+            row.setData(country: countryList[indexPath.row])
         }
         return row
     }
@@ -63,7 +71,7 @@ class CountriesViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "toDetailSegue") {
             let detailController = segue.destination as! DetailViewController
-            detailController.country = countryList[tableView.indexPathForSelectedRow!.row]["Country"]!
+            detailController.country = countryList[tableView.indexPathForSelectedRow!.row]
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }
     }
