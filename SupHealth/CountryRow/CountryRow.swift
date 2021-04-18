@@ -11,13 +11,19 @@ import UIKit
 class CountryRow: UITableViewCell {
 
     @IBOutlet weak var country: UILabel!
+    @IBOutlet weak var starIcon: UIImageView!
+    let defaults = UserDefaults.standard
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func setData(country: String){
         self.country.text = country
+        if(!defaults.bool(forKey: country)){
+            starIcon.isHidden = true
+        } else {
+            starIcon.isHidden = false
+        }
     }
 }

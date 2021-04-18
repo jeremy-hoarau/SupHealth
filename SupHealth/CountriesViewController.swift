@@ -51,15 +51,16 @@ class CountriesViewController: UIViewController, UITableViewDelegate, UITableVie
     func convertResponseToArray(response : [String : Any]) -> [String]{
         var countryName = ""
         var array = [String]()
-        let countries = response["Countries"] as! [[String : Any]]
-        for country in countries {
-            countryName = country["Country"] as! String
-            if(filterFavOnly){
-                if(!defaults.bool(forKey: countryName)){
-                    continue
+        if let countries = response["Countries"] as? [[String : Any]] {
+            for country in countries {
+                countryName = country["Country"] as! String
+                if(filterFavOnly){
+                    if(!defaults.bool(forKey: countryName)){
+                        continue
+                    }
                 }
+                array.append(countryName)
             }
-            array.append(countryName)
         }
         return array
     }

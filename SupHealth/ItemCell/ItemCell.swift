@@ -15,6 +15,7 @@ class ItemCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.layer.cornerRadius = 15
         self.title.text = ""
         self.value.text = ""
     }
